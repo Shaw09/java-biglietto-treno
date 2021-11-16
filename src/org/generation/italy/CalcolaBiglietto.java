@@ -9,31 +9,42 @@ public class CalcolaBiglietto {
 		Scanner scanner = new Scanner(System.in);
 		
 		double baseCost = 0.21;
-		int underAge = 17;
-		int overAge = 65;
+		double sale40 = 0.4;
+		double sale20 = 0.2;
+		int underAge = 18;
+		int overAge = 64;
 		int age;
 		
-		System.out.println("Inserisci i km da percorrere: ");
+		System.out.print("Inserisci i km da percorrere: ");
 		double kmDaPercorrere = scanner.nextDouble();
-		String kmFormattati = String.format("%.2f", kmDaPercorrere);
-		System.out.println(kmFormattati);
 		
-		System.out.println("Inserire età passeggero: ");
+		System.out.print("Inserire età passeggero: ");
 		age = scanner.nextInt();
 		
-		double kmSom = kmFormattati * baseCost;
+		double prezzo = kmDaPercorrere * baseCost;
+		String sconto = "nessuno sconto"; 
+
+		// prova ad aggiungere sconto effettivo    
+		// double prezzoSconto;
 		
 		if(age > overAge) {
-			System.out.println("-40%");
+			prezzo = prezzo - prezzo * sale40;
+			sconto = "40%";
+			// prezzoSconto = prezzo * sale40;
 		} else if (age < underAge) {
-			System.out.println("-20%");
-		} else {
-			System.out.println("No Sconto");
+			prezzo = prezzo - prezzo * sale20;
+			sconto = "20%";
+			// prezzoSconto = prezzo * sale20;
 		}
 		
-		double kmSomAge = kmSom * age;
+		// String prezzoScontoFor = String.format("%.2f", prezzoSconto); 
+		String prezzoFormat = String.format("%.2f", prezzo);
 		
-		System.out.println("Costo per km ed età: " + kmSomAge);
+		System.out.println("La tua età è di: " + age + " anni");
+		System.out.println("I tuoi km percorsi sono di: " + kmDaPercorrere + "km");
+		System.out.println("Costo per km ed età: " + prezzoFormat + "€");
+		System.out.println("È stato applicato uno sconto del: " + sconto);
+		// System.out.println("Hai risparmiato: " + prezzoSconto + "€");
 		
 		scanner.close();
 		
